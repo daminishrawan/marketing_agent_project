@@ -182,3 +182,62 @@ def get_lead(conn: sqlite3.Connection, company_id: str, lead_id: str) -> LeadRes
         return LeadResult(error=_error("LEAD_NOT_FOUND", f"no lead {lead_id} for this company",
                                        "Check lead_id and company_id"))
     return LeadResult(lead=_row_to_lead(row))
+
+
+# ── lead scoring ──────────────────────────────────────────────────────────────
+
+_INQUIRY_LENGTHS = [(200, 20), (50, 10)]
+_SOURCE_SCORES = {
+    "referral": 20,
+    "web_form": 10,
+    "chatbot": 5,
+    "cold_outreach": 0,
+    "event": 15,
+    "partner": 15,
+}
+_PRODUCT_KEYWORDS = [
+    "product", "model", "ac", "heater", "coffee", "roast", "solar",
+    "inverter", "battery", "panel", "offer", "discount", "bulk", "wholesale",
+]
+_URGENCY_WORDS = ["urgent", "now", "today", "asap", "immediately", "quick", "rush"]
+
+_BASE_SCORE = 30
+
+
+def _compute_score(inquiry_text: str, lead_source: str) -> int:
+    score = _BASE_SCORE
+    length = len(inquiry_text.strip())
+    for threshold, points in _INQUIRY_LENGTHS:
+        if length > threshold:
+            score += points
+            break
+    score += _SOURCE_SCORES.get(lead_source, 5)
+    words = set(inquiry_text.lower().split())
+    if words & set(_PRODUCT_KEYWORDS):
+        score += 15
+    if words & set(_URGENCY_WORDS):
+        score += 10
+    return max(0, min(100, score))
+
+
+def _recommended_action(score: int) -> tuple[str | None, str | None]:
+    if score >= 70:
+        return "route_to_sales", "sales_team"
+    if score >= 40:
+        return "nurture", "marketing_queue"
+    return "review", None
+
+
+def score_lead(conn: sqlite3.Connection, company_id: str, lead_id: str) -> LeadResult:
+    result = get_lead(conn, company_id, lead_id)
+    if result.error is not None:
+        return result
+    lead = result.lead
+    score = _compute_score(lead.inquiry_text, lead.lead_source)
+    action, destination = _recommended_action(score)
+    conn.execute(
+        "UPDATE customer_leads SET qualification_score = ?, recommended_action = ?, routing_destination = ? WHERE lead_id = ?",
+        (score, action, destination, lead_id),
+    )
+    conn.commit()
+    return get_lead(conn, company_id, lead_id)
