@@ -1,0 +1,17 @@
+{
+  "company_id": "comp_pulsepeak_02",
+  "note": "Synthetic catalogue. Product caps are placeholder policy values pending business confirmation.",
+  "products": [
+    {"product_id": "day_pass", "name": "Day Pass", "max_allowed_discount": 25, "max_allowed_unit": "percent"},
+    {"product_id": "core_monthly", "name": "Core Monthly", "max_allowed_discount": 25, "max_allowed_unit": "percent"},
+    {"product_id": "all_access_monthly", "name": "All-Access Monthly", "max_allowed_discount": 25, "max_allowed_unit": "percent"},
+    {"product_id": "annual_all_access", "name": "Annual All-Access", "max_allowed_discount": 25, "max_allowed_unit": "percent"},
+    {"product_id": "student_core", "name": "Student Core", "max_allowed_discount": 500, "max_allowed_unit": "inr"},
+    {"product_id": "personal_training", "name": "Personal Training", "max_allowed_discount": 15, "max_allowed_unit": "percent"}
+  ],
+  "offers": [
+    {"offer_id": "monsoon_restart", "product_id": "core_monthly", "discount_type": "percentage", "discount_value": 20, "start_date": "2026-12-01", "end_date": "2026-12-31", "terms": "New members only. Not combinable with other discounts.", "approved_flag": false},
+    {"offer_id": "refer_a_friend", "product_id": "day_pass", "discount_type": "bogo", "discount_value": 100, "start_date": "2026-12-01", "end_date": "2026-12-31", "terms": "One free Day Pass per referred friend who joins a monthly plan.", "approved_flag": false},
+    {"offer_id": "student_core_launch", "product_id": "student_core", "discount_type": "flat", "discount_value": 500, "start_date": "2026-12-01", "end_date": "2027-03-31", "terms": "Requires a valid student ID at sign-up.", "approved_flag": false}
+  ]
+}

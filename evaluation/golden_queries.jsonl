@@ -1,0 +1,37 @@
+{"query_id": "A01", "company_id": "comp_cloudvane_01", "query": "which solar AC model is cheapest to buy", "gold_phrase": "INR 46,000 inclusive of GST", "label_status": "self-drafted"}
+{"query_id": "A02", "company_id": "comp_cloudvane_01", "query": "what does the ALOHA energy saving device cost", "gold_phrase": "Website-listed investment: INR 5,000", "label_status": "self-drafted"}
+{"query_id": "A03", "company_id": "comp_cloudvane_01", "query": "can a solar AC switch to grid power when the sun is down", "gold_phrase": "Automatic use of solar power when available and grid support when needed", "label_status": "self-drafted"}
+{"query_id": "A04", "company_id": "comp_cloudvane_01", "query": "wind turbine for a farm or water pumping", "gold_phrase": "Intended for farms, water pumping and village electrification", "label_status": "self-drafted"}
+{"query_id": "A05", "company_id": "comp_cloudvane_01", "query": "how noisy is the helical wind turbine", "gold_phrase": "below 45 dB", "label_status": "self-drafted"}
+{"query_id": "A06", "company_id": "comp_cloudvane_01", "query": "energy saving device that works with split inverter ACs", "gold_phrase": "Plug-and-play energy-saving device for split or ductable inverter ACs", "label_status": "self-drafted"}
+{"query_id": "A07", "company_id": "comp_cloudvane_01", "query": "which device supports 1 to 5 ton air conditioners", "gold_phrase": "Website-listed support: 1 to 5 ton ACs", "label_status": "self-drafted"}
+{"query_id": "A08", "company_id": "comp_cloudvane_01", "query": "can the solar AC capacity be expanded later", "gold_phrase": "Expandable architecture described from 1.5 ton to 2.0 ton", "label_status": "self-drafted"}
+{"query_id": "A09", "company_id": "comp_cloudvane_01", "query": "how do I register a complaint about my AC service", "gold_phrase": "complaint registration and complaint tracking", "label_status": "self-drafted"}
+{"query_id": "A10", "company_id": "comp_cloudvane_01", "query": "what voltage range does ALOHA accept", "gold_phrase": "Website-listed voltage: 180 to 260 V AC", "label_status": "self-drafted"}
+{"query_id": "A11", "company_id": "comp_cloudvane_01", "query": "energy management services for institutions", "gold_phrase": "Institutional energy management", "label_status": "self-drafted"}
+{"query_id": "A12", "company_id": "comp_cloudvane_01", "query": "smart boards for schools and colleges", "gold_phrase": "IFPD smart boards", "label_status": "self-drafted"}
+{"query_id": "B01", "company_id": "comp_pulsepeak_02", "query": "monthly gym membership that includes the sauna", "gold_phrase": "All-Access Monthly: INR 3,499 per month", "label_status": "self-drafted"}
+{"query_id": "B02", "company_id": "comp_pulsepeak_02", "query": "is there a student discount on gym membership", "gold_phrase": "Student Core: INR 1,999 per month", "label_status": "self-drafted"}
+{"query_id": "B03", "company_id": "comp_pulsepeak_02", "query": "can a new member get a free trial session", "gold_phrase": "Book a free trial session", "label_status": "self-drafted"}
+{"query_id": "B04", "company_id": "comp_pulsepeak_02", "query": "how many guest passes can I bring a friend with", "gold_phrase": "All-Access members receive 2 guest passes per month", "label_status": "self-drafted"}
+{"query_id": "B05", "company_id": "comp_pulsepeak_02", "query": "refund if I cancel the annual plan", "gold_phrase": "Annual plan refunds are pro-rata minus a 10 percent admin fee", "label_status": "self-drafted"}
+{"query_id": "B06", "company_id": "comp_pulsepeak_02", "query": "is there a swimming pool at the club", "gold_phrase": "25 metre indoor lap pool", "label_status": "self-drafted"}
+{"query_id": "B07", "company_id": "comp_pulsepeak_02", "query": "what does one personal training session cost", "gold_phrase": "INR 1,500 per session", "label_status": "self-drafted"}
+{"query_id": "B08", "company_id": "comp_pulsepeak_02", "query": "how do I cancel my monthly membership", "gold_phrase": "Monthly plans cancel with 30 days written notice", "label_status": "self-drafted"}
+{"query_id": "B09", "company_id": "comp_pulsepeak_02", "query": "refer a friend reward", "gold_phrase": "Refer-a-Friend: one free Day Pass", "label_status": "self-drafted"}
+{"query_id": "B10", "company_id": "comp_pulsepeak_02", "query": "minimum age to join the gym", "gold_phrase": "Members must be 16 or older", "label_status": "self-drafted"}
+{"query_id": "B11", "company_id": "comp_pulsepeak_02", "query": "monsoon offer discount on core membership", "gold_phrase": "Monsoon Restart: 20 percent off Core Monthly", "label_status": "self-drafted"}
+{"query_id": "B12", "company_id": "comp_pulsepeak_02", "query": "does the cold plunge cure injuries", "gold_phrase": "Medical, injury-recovery or therapeutic claims", "label_status": "self-drafted"}
+{"query_id": "C01", "company_id": "comp_terraroast_03", "query": "good single origin coffee for a beginner", "gold_phrase": "Yirgacheffe Single Origin (Ethiopia): 250 g INR 650", "label_status": "self-drafted"}
+{"query_id": "C02", "company_id": "comp_terraroast_03", "query": "price of the cold brew concentrate", "gold_phrase": "Cold Brew Concentrate: 500 ml INR 480", "label_status": "self-drafted"}
+{"query_id": "C03", "company_id": "comp_terraroast_03", "query": "how much caffeine is in the beans", "gold_phrase": "Caffeine content in milligrams", "label_status": "self-drafted"}
+{"query_id": "C04", "company_id": "comp_terraroast_03", "query": "when does shipping become free", "gold_phrase": "Shipping is free on orders above INR 999", "label_status": "self-drafted"}
+{"query_id": "C05", "company_id": "comp_terraroast_03", "query": "can I return coffee I have not opened", "gold_phrase": "Unopened bags can be returned within 7 days", "label_status": "self-drafted"}
+{"query_id": "C06", "company_id": "comp_terraroast_03", "query": "festive discount on the 1 kg bags", "gold_phrase": "Festive Brew Week: 15 percent off all 1 kg bags", "label_status": "self-drafted"}
+{"query_id": "C07", "company_id": "comp_terraroast_03", "query": "monthly coffee subscription box price", "gold_phrase": "Monthly Box: INR 1,299 per month", "label_status": "self-drafted"}
+{"query_id": "C08", "company_id": "comp_terraroast_03", "query": "pour over kit bundle deal", "gold_phrase": "Starter bundle: Pour-over Starter Kit plus Yirgacheffe 250 g for INR 2,199", "label_status": "self-drafted"}
+{"query_id": "C09", "company_id": "comp_terraroast_03", "query": "which countries do the beans come from", "gold_phrase": "Beans come from partner farms in Ethiopia, Colombia, Brazil and India", "label_status": "self-drafted"}
+{"query_id": "C10", "company_id": "comp_terraroast_03", "query": "can we say the coffee is carbon neutral", "gold_phrase": "Carbon-neutral or climate-positive claims are not permitted", "label_status": "self-drafted"}
+{"query_id": "C11", "company_id": "comp_terraroast_03", "query": "coffee with dark chocolate and orange notes", "gold_phrase": "dark chocolate, orange peel, brown sugar", "label_status": "self-drafted"}
+{"query_id": "C12", "company_id": "comp_terraroast_03", "query": "how do I know the coffee is fresh", "gold_phrase": "Each bag shows the roast date", "label_status": "self-drafted"}
+{"query_id": "C13", "company_id": "comp_terraroast_03", "query": "does the coffee detox the body", "gold_phrase": "Health claims such as", "label_status": "self-drafted"}

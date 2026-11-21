@@ -1,0 +1,20 @@
+[
+  {
+    "lead_id": "lead_syn_B001",
+    "company_id": "comp_pulsepeak_02",
+    "lead_source": "web_form",
+    "contact_masked": "j***@example.com",
+    "inquiry_text": "Looking for all-access gym membership with sauna access.",
+    "consent_flag": true,
+    "expected_status": "qualified"
+  },
+  {
+    "lead_id": "lead_syn_B002",
+    "company_id": "comp_pulsepeak_02",
+    "lead_source": "web_form",
+    "contact_masked": "s***@example.net",
+    "inquiry_text": "Do you guarantee I will lose 10 kg in a month?",
+    "consent_flag": true,
+    "expected_status": "qualified"
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "lead_id": "lead_syn_C001",
+    "company_id": "comp_terraroast_03",
+    "lead_source": "web_form",
+    "contact_masked": "a***@example.com",
+    "inquiry_text": "Which single origin is best for a beginner who likes sweet coffee?",
+    "consent_flag": true,
+    "expected_status": "qualified"
+  },
+  {
+    "lead_id": "lead_syn_C002",
+    "company_id": "comp_terraroast_03",
+    "lead_source": "inbox",
+    "contact_masked": "k***@example.org",
+    "inquiry_text": "Send me your bulk wholesale price list for 50 cafes.",
+    "consent_flag": true,
+    "expected_status": "routed_to_sales"
+  }
+]

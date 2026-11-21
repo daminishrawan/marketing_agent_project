@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+storage/
+data_output/
+pptx_extracted/
+.claude/
+.DS_Store
+project_details.md

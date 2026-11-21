@@ -1,0 +1,17 @@
+{
+  "company_id": "comp_terraroast_03",
+  "note": "Synthetic catalogue. Product caps are placeholder policy values pending business confirmation.",
+  "products": [
+    {"product_id": "single_origin_1kg", "name": "Single origin 1 kg", "max_allowed_discount": 20, "max_allowed_unit": "percent"},
+    {"product_id": "single_origin_250g", "name": "Single origin 250 g", "max_allowed_discount": 20, "max_allowed_unit": "percent"},
+    {"product_id": "everyday_blend", "name": "Everyday Blend 250 g", "max_allowed_discount": 20, "max_allowed_unit": "percent"},
+    {"product_id": "cold_brew", "name": "Cold Brew Concentrate", "max_allowed_discount": 20, "max_allowed_unit": "percent"},
+    {"product_id": "pour_over_kit", "name": "Pour-over Starter Kit", "max_allowed_discount": 20, "max_allowed_unit": "percent"},
+    {"product_id": "monthly_box", "name": "Monthly Box", "max_allowed_discount": 20, "max_allowed_unit": "percent"}
+  ],
+  "offers": [
+    {"offer_id": "festive_brew_week", "product_id": "single_origin_1kg", "discount_type": "percentage", "discount_value": 15, "start_date": "2026-12-10", "end_date": "2026-12-25", "terms": "Maximum INR 400 per order. Not combinable with the Monthly Box discount.", "approved_flag": false},
+    {"offer_id": "monthly_box_first", "product_id": "monthly_box", "discount_type": "percentage", "discount_value": 10, "start_date": "2026-11-21", "end_date": "2027-06-30", "terms": "New subscribers only.", "approved_flag": false},
+    {"offer_id": "starter_bundle", "product_id": "pour_over_kit", "discount_type": "bundle", "discount_value": 2199, "start_date": "2026-11-21", "end_date": "2026-12-31", "terms": "Pour-over Starter Kit plus Yirgacheffe 250 g for INR 2,199.", "approved_flag": false}
+  ]
+}

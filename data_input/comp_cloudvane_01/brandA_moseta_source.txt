@@ -1,0 +1,246 @@
+MARKETMIND AI EXTRACTION INPUT
+===============================
+
+SOURCE INFORMATION
+------------------
+Primary website: https://moseta.in/
+Products page: https://moseta.in/products
+Contact page: https://moseta.in/contact
+Source type: Public company website
+Retrieved for dry-run extraction: 17 November 2026
+
+IMPORTANT DATA POLICY
+---------------------
+The information below is copied/summarised from public website content.
+Website claims, prices, certifications, savings, rankings, customer numbers,
+payback periods and performance figures must be checked against current
+certificates, datasheets, invoices or approved company documents before they
+are used in an advertisement. Do not automatically publish any claim.
+
+COMPANY AND BRAND
+-----------------
+Brand name: MOSETA
+Tagline/positioning: Renewable Luxury
+Company shown on the website: Oxyneuron India Pvt Ltd
+Business area: Solar air conditioners, clean-energy cooling, renewable energy,
+wind turbines, solar inverters and plants, AI robotics, IFPD smart boards,
+technical consultancy and institutional energy solutions.
+Country/market: India
+
+WEBSITE POSITIONING
+-------------------
+MOSETA presents itself as an Indian solar air-conditioner and clean-energy
+solutions brand. The website describes high-efficiency, solar-ready and
+hybrid AC/DC systems designed for residential, commercial and institutional
+use. The stated focus is lower electricity consumption, solar integration,
+reliable cooling and renewable-energy adoption.
+
+MAIN CUSTOMER GROUPS
+--------------------
+Homeowners facing high electricity bills
+Builders and developers
+Commercial property owners
+Schools, colleges and other institutions
+Banks and offices
+ESG-driven organisations
+Green-building and solar-ready projects
+Farms, remote homes and community-energy projects
+
+SOLAR AIR-CONDITIONING SOLUTIONS
+--------------------------------
+1. MOSETA Solar-Hybrid Air Conditioners
+   - Solar-ready architecture
+   - Hybrid AC/DC operation described on the website
+   - Automatic use of solar power when available and grid support when needed
+   - Website-listed ISEER ratings include 5.8 and 6.16
+   - Designed for residential, commercial and institutional use
+
+2. MOSETA Moto pi DS
+   - Direct-supply, high-efficiency model
+   - Website-listed ISEER rating up to 5.8
+   - Expandable architecture described from 1.5 ton to 2.0 ton
+   - Solar-panel-ready design
+   - Website-listed investment: INR 46,000 inclusive of GST for grid AC power
+   - Price and specifications must be reconfirmed before advertising
+
+3. MOSETA Moto pi ODS
+   - On-demand solar-hybrid AC
+   - Dual-mode solar DC and grid AC operation described
+   - Automatic solar/grid switching
+   - Website-listed investment: INR 70,000 inclusive of GST with one panel
+   - Website-listed payback: 2.5 to 3.5 years
+   - Payback and price are website claims and require case-specific verification
+
+4. MOSETA Moto pi DS - Full Solar
+   - Full-solar configuration described for daytime operation
+   - Five 450-watt panels, stated total capacity 2.25 kW
+   - Grid backup when required
+   - Website-listed investment: INR 1,05,000 inclusive of GST with five panels
+   - Website-listed payback: 2 to 3 years
+   - Verify system design, installation conditions and current price
+
+SMART ENERGY-SAVING DEVICES
+----------------------------
+1. MOSETA ALOHA
+   - Plug-and-play energy-saving device for split or ductable inverter ACs
+   - Website describes proprietary MVTf-PD technology
+   - The six stated sensing/optimisation parameters are Moisture, Voltage,
+     Temperature, Frequency, Power Factor and Displacement
+   - Website-listed support: 0.8 to 3 ton ACs
+   - Website-listed voltage: 180 to 260 V AC
+   - Website-listed phase: single phase
+   - Website-listed investment: INR 5,000 inclusive of GST
+   - Website-listed energy reduction claim: up to 40 to 60 percent
+   - Website-listed payback claim: 3 to 4 months
+   - Energy and payback claims require test evidence before publication
+
+2. MOSETA VISA
+   - Solar AC conversion companion
+   - Designed for hybrid solar AC systems
+   - Website-listed support: 1 to 5 ton ACs
+   - LCD display and solar compatibility are described
+   - Website-listed investment: INR 25,000
+   - Website-listed ROI period: 12 to 18 months
+   - Price and ROI must be checked before publication
+
+WIND-TURBINE SOLUTIONS
+-----------------------
+1. MOSETA 5 kVA Helical Hybrid Wind Turbine
+   - Three-blade helical vertical-axis design
+   - Designed to capture wind from different directions
+   - Website-listed rated power: 5 kVA
+   - Website-listed rotor size: 1200 mm x 3000 mm
+   - Website-listed start-wind range: approximately 2.5 to 3 m/s
+   - AC/DC hybrid output is described
+   - Solar integration is described
+   - Website-listed noise claim: below 45 dB
+   - Website-listed life: 20 years
+   - Website-listed warranty: 2 years
+   - Website-listed payback: 3 to 5 years residential and 2 to 4 years commercial
+   - All performance, noise, life and payback claims require technical validation
+
+2. MW-650W Wind Turbine
+   - Compact solution for remote homes and small applications
+   - Website-listed peak power: 750 W
+   - Website-listed rotor diameter: 2.2 m
+   - Website-listed cut-in speed: 2.7 m/s
+   - Website-listed weight: 23 kg
+   - Website-listed monthly output estimate: 72 kWh at 4.5 m/s
+
+3. MW-1500W Wind Turbine
+   - Intended for small houses, signalling and beacon applications
+   - Website-listed peak power: 1700 W
+   - Website-listed rotor diameter: 3.2 m
+   - Website-listed cut-in speed: 2.7 m/s
+   - Website-listed weight: 34 kg
+   - Website-listed monthly output estimate: 166 kWh at 4.5 m/s
+
+4. MW-3300W Wind Turbine
+   - Intended for farms, water pumping and village electrification
+   - Website-listed peak power: 3600 W
+   - Website-listed rotor diameter: 4.65 m
+   - Website-listed cut-in speed: 2.7 m/s
+   - Website-listed weight: 77 kg
+   - Website-listed monthly output estimate: 362 kWh at 4.5 m/s
+
+5. UE-77 7.7 kW Wind Turbine
+   - Described for low-wind sites and community power
+   - Website-listed peak power: 10 kW
+   - Website-listed rotor diameter: 5.66 m
+   - Website-listed cut-in speed: 1.5 m/s
+   - Website-listed weight: 300 kg
+   - Website-listed monthly output estimate: 780 kWh at 4.5 m/s
+
+OTHER SOLUTIONS LISTED ON THE WEBSITE
+--------------------------------------
+Solar inverters and solar plants
+Solar panels and batteries
+AI robotics systems
+IFPD smart boards
+Medical gas plants
+Smart campus infrastructure
+Technical consultancy
+Institutional energy management
+Solar plant and energy calculators
+AC service and complaint registration
+
+TECHNOLOGY THEMES
+-----------------
+Solar-first architecture
+Hybrid solar and grid operation
+Inverter-compressor efficiency
+Modular indoor design
+Reduced piping length and installation complexity
+Potentially fewer leakage points through simplified installation
+Expandable cooling capacity described from 1.5 ton to 2.0 ton
+MVTf-PD technology for AC-specific optimisation
+Vertical-axis helical wind-turbine design
+Renewable-energy integration for homes, businesses and institutions
+
+WEBSITE-LISTED COMPANY METRICS
+-------------------------------
+The website contains different figures on different sections. Treat these as
+unverified website statements until the company approves one official version:
+
+Home page statements include approximately 500+ projects completed,
+25 MW+ total capacity installed and 15+ years of experience.
+
+Other website sections mention approximately 17+ years of experience and
+30,000+ customers/global customers.
+
+These figures must not be combined or advertised without confirming the
+official approved numbers.
+
+CONTACT INFORMATION
+-------------------
+Company: Oxyneuron India Pvt Ltd
+Country: India
+Phone/IVR shown on website: 9960061439
+General email: info@moseta.in
+Service email: service@moseta.in
+Website business hours shown: Monday to Friday, 8:00 AM to 6:00 PM;
+Saturday, 9:00 AM to 4:00 PM
+
+CUSTOMER SUPPORT
+----------------
+The website provides complaint registration and complaint tracking.
+Customer support information may ask for customer identity, mobile number,
+email, address, AC serial number, product details, photographs and invoices.
+Do not place real customer personal information into a public marketing
+knowledge base. Store support records separately with access control.
+
+MARKETING RULES FOR MARKETMIND AI
+---------------------------------
+Allowed draft themes after human review:
+Energy efficiency
+Solar-ready operation
+Hybrid solar/grid flexibility
+Reliable cooling
+Professional consultation
+Renewable-energy adoption
+Institutional and commercial use
+
+Claims requiring approval before use:
+India's first or highest ranking
+BEE or ISEER certification statements
+Exact electricity-bill reduction percentages
+Exact ROI or payback periods
+Exact customer, project or installed-capacity numbers
+Exact prices and discounts
+Warranty, life and noise claims
+Comparisons with Daikin, LG, Voltas or other brands
+Medical, health, safety or guaranteed-performance claims
+
+DEFAULT CALL TO ACTION
+----------------------
+Request a verified product consultation from MOSETA/Oxyneuron India Pvt Ltd.
+Ask for the appropriate model, current price, installation requirement,
+approved certification and warranty terms.
+
+EXTRACTION INSTRUCTION
+----------------------
+Extract company name, brand, products, target customers, customer problems,
+benefits, product specifications, price mentions, contact details, source
+references and claims requiring verification. Preserve the labels
+"website-listed" and "requires verification". Do not convert marketing
+claims into confirmed facts.

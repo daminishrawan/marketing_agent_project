@@ -1,0 +1,12 @@
+{
+  "company_id": "comp_cloudvane_01",
+  "note": "Synthetic catalogue. Product caps are placeholder policy values pending business confirmation.",
+  "products": [
+    {"product_id": "moto_pi_ds", "name": "MOSETA Moto pi DS", "max_allowed_discount": 10, "max_allowed_unit": "percent"},
+    {"product_id": "moto_pi_ods", "name": "MOSETA Moto pi ODS", "max_allowed_discount": 10, "max_allowed_unit": "percent"},
+    {"product_id": "moto_pi_ds_full_solar", "name": "MOSETA Moto pi DS - Full Solar", "max_allowed_discount": 10, "max_allowed_unit": "percent"},
+    {"product_id": "aloha", "name": "MOSETA ALOHA", "max_allowed_discount": 10, "max_allowed_unit": "percent"},
+    {"product_id": "visa", "name": "MOSETA VISA", "max_allowed_discount": 10, "max_allowed_unit": "percent"}
+  ],
+  "offers": []
+}
