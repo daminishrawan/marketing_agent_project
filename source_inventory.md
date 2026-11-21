@@ -156,5 +156,5 @@ Each source must be tagged with:
 - [x] Register reference files and third-party licences (sections 4 and 5)
 - [ ] Decide the Brand A licence (section 6)
 - [ ] Confirm E1 copyright holder and M2 dataset terms (section 6)
-- [ ] Generate a machine-readable manifest (`data_input/source_manifest.json`), T3
+- [x] Generate a machine-readable manifest: `source_manifest.json` at the project root, built by `python -m src.mm.manifest` (T3). It sits outside `data_input/` so the ingestion scan and the inventory test don't treat it as source data
 - [ ] Pass inventory to Dr. Ashutosh Verma for consistency review

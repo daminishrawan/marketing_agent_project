@@ -201,7 +201,8 @@ Rule: a part does not start until the previous part's gate artifact exists.
   - F1 done: git initialised on `main`. Baseline commit `3821de5`. `.gitignore` excludes `.venv`, `storage/`, `data_output/`, `pptx_extracted/`, `.claude/`, and `project_details.md` (it contains a sample HMAC key from the spec).
   - T1 done: licence register in `source_inventory.md` section 5. Both repos are MIT. Python dependencies and both models are recorded. Open: confirm the E1 copyright holder by reading its LICENSE file, and check the MS MARCO dataset terms.
   - T2 done: every project data file (13) and every Drive reference file (10) is registered with its SHA-256. `tests/test_inventory.py` fails if a file is unregistered or its content has changed. Full suite: 209 passing. T1 and T2 are not committed yet.
-  - T3 (machine-readable manifest) and T4 (Brand A licence decision) are next. T4 needs your decision.
+  - T3 done: `src/mm/manifest.py` builds `source_manifest.json` at the project root (spec path was `data_input/source_manifest.json`; moved so the ingestion scan doesn't treat it as data). Every project data file must be declared, undeclared or missing files fail the build, and hashes are full SHA-256. `python -m src.mm.manifest --check` verifies it is current. `tests/test_manifest.py` (8 tests). Full suite: 217 passing. T3 is not committed yet.
+  - T4 (Brand A licence decision) is still open and needs your decision.
 - Retention sweep scheduled: a crontab entry runs a dry run daily at 02:17 local time. Reports go to `storage/reports/retention/YYYY-MM-DD_dryrun.json`, and cron output to `storage/reports/retention/cron.log`. The job never deletes. Deletion stays a manual `--apply` run after someone reads the report.
   - Risk to check: macOS may block cron from reading the Documents folder until cron is granted Full Disk Access. Confirm the first scheduled run wrote a report.
 - Memory policy written (`memory_policy.md`, draft for Aniket's review).

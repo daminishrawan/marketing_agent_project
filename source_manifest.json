@@ -1,0 +1,148 @@
+{
+  "schema_version": "marketmind-source-manifest-1.0",
+  "sources": [
+    {
+      "source_id": "brandA_moseta:company_profile:001",
+      "source_type": "company_profile",
+      "source_ref": "brand_packs/brandA_moseta/brandA_profile.json",
+      "source_date": "2026-11-20",
+      "owner": "Damini Shrawan",
+      "licence": "Project-created (synthetic)",
+      "brand": "brandA_moseta",
+      "version": "1.0",
+      "sha256": "7341c14ed39c24ff22fc32f90e57fc41ea94dd7f76e24a784da4f86bf6acce7a"
+    },
+    {
+      "source_id": "brandA_moseta:catalogue:001",
+      "source_type": "catalogue",
+      "source_ref": "brand_packs/brandA_moseta/catalogue.json",
+      "source_date": "2026-11-20",
+      "owner": "Damini Shrawan",
+      "licence": "Project-created (synthetic)",
+      "brand": "brandA_moseta",
+      "version": "1.0",
+      "sha256": "ca64ad78f11919a67e93853f92521a8b29edda95277fc0d8a72bf2ff858dec37"
+    },
+    {
+      "source_id": "brandA_moseta:lead_data:001",
+      "source_type": "lead_data",
+      "source_ref": "brand_packs/brandA_moseta/synthetic_leads.json",
+      "source_date": "2026-11-20",
+      "owner": "Damini Shrawan",
+      "licence": "Project-created (synthetic)",
+      "brand": "brandA_moseta",
+      "version": "1.0",
+      "sha256": "366401111ef05bd06b11fd05ea5499f7be6dbef8f041a23df88322c58858ed84"
+    },
+    {
+      "source_id": "brandB_pulsepeak:company_profile:001",
+      "source_type": "company_profile",
+      "source_ref": "brand_packs/brandB_pulsepeak/brandB_profile.json",
+      "source_date": "2026-11-21",
+      "owner": "Damini Shrawan",
+      "licence": "Project-created (synthetic)",
+      "brand": "brandB_pulsepeak",
+      "version": "1.0",
+      "sha256": "7106840af64fed53e5389b710219331f63839027c1e17f28fce82d2c63fd83e0"
+    },
+    {
+      "source_id": "brandB_pulsepeak:catalogue:001",
+      "source_type": "catalogue",
+      "source_ref": "brand_packs/brandB_pulsepeak/catalogue.json",
+      "source_date": "2026-11-21",
+      "owner": "Damini Shrawan",
+      "licence": "Project-created (synthetic)",
+      "brand": "brandB_pulsepeak",
+      "version": "1.0",
+      "sha256": "a9f01919e79d265f95db97be53b4b5f7c051402aadc5931f307cd2b1c850015b"
+    },
+    {
+      "source_id": "brandB_pulsepeak:lead_data:001",
+      "source_type": "lead_data",
+      "source_ref": "brand_packs/brandB_pulsepeak/synthetic_leads.json",
+      "source_date": "2026-11-21",
+      "owner": "Damini Shrawan",
+      "licence": "Project-created (synthetic)",
+      "brand": "brandB_pulsepeak",
+      "version": "1.0",
+      "sha256": "5171c6313b9c10cb69677bd009eef2e8d1cac6d907fca448dfc85dd3dab3cbdd"
+    },
+    {
+      "source_id": "brandC_terraroast:company_profile:001",
+      "source_type": "company_profile",
+      "source_ref": "brand_packs/brandC_terraroast/brandC_profile.json",
+      "source_date": "2026-11-21",
+      "owner": "Damini Shrawan",
+      "licence": "Project-created (synthetic)",
+      "brand": "brandC_terraroast",
+      "version": "1.0",
+      "sha256": "056029b90a6aef43dfdf5168b1cf66983cc961aa86f92d67815e587b27aadbcc"
+    },
+    {
+      "source_id": "brandC_terraroast:catalogue:001",
+      "source_type": "catalogue",
+      "source_ref": "brand_packs/brandC_terraroast/catalogue.json",
+      "source_date": "2026-11-21",
+      "owner": "Damini Shrawan",
+      "licence": "Project-created (synthetic)",
+      "brand": "brandC_terraroast",
+      "version": "1.0",
+      "sha256": "587f90c3be62e7ca7d51308a95e3effc23d0bc8795f3e12ce2867a7e01ce5663"
+    },
+    {
+      "source_id": "brandC_terraroast:lead_data:001",
+      "source_type": "lead_data",
+      "source_ref": "brand_packs/brandC_terraroast/synthetic_leads.json",
+      "source_date": "2026-11-21",
+      "owner": "Damini Shrawan",
+      "licence": "Project-created (synthetic)",
+      "brand": "brandC_terraroast",
+      "version": "1.0",
+      "sha256": "89c727c81077bc112eaf3fa8441382a680a01052c189ef3508190b7a3b776cfd"
+    },
+    {
+      "source_id": "brandA_moseta:source_text:001",
+      "source_type": "source_text",
+      "source_ref": "data_input/comp_cloudvane_01/brandA_moseta_source.txt",
+      "source_date": "2026-11-20",
+      "owner": "Damini Shrawan",
+      "licence": "open: public-derived, pending decision (inventory section 6)",
+      "brand": "brandA_moseta",
+      "version": "v1.0",
+      "sha256": "c4ecec35cc790c11a6e0b39dbbe4588e6657084b1753003d052b1e5ed83b3aa0"
+    },
+    {
+      "source_id": "brandB_pulsepeak:source_text:001",
+      "source_type": "source_text",
+      "source_ref": "data_input/comp_pulsepeak_02/facilities_and_terms.md",
+      "source_date": "2026-11-21",
+      "owner": "Damini Shrawan",
+      "licence": "Project-created (synthetic)",
+      "brand": "brandB_pulsepeak",
+      "version": "v1.0",
+      "sha256": "60316bcd4b575b25a17e5a25760ddcb85e7576d31762b8a727244a827c906b46"
+    },
+    {
+      "source_id": "brandC_terraroast:source_text:001",
+      "source_type": "source_text",
+      "source_ref": "data_input/comp_terraroast_03/bean_origins_and_catalog.md",
+      "source_date": "2026-11-21",
+      "owner": "Damini Shrawan",
+      "licence": "Project-created (synthetic)",
+      "brand": "brandC_terraroast",
+      "version": "v1.0",
+      "sha256": "c416b88079788357c100f104820a23214b08544f8eca9edde9f42ae1bf2cfcf5"
+    },
+    {
+      "source_id": "all_brands:evaluation_labels:001",
+      "source_type": "evaluation_labels",
+      "source_ref": "evaluation/golden_queries.jsonl",
+      "source_date": "2026-11-21",
+      "owner": "Damini Shrawan (drafted); Dr. Ashutosh Verma to review",
+      "licence": "Project-created; self-drafted, not evaluation-grade",
+      "brand": "all_brands",
+      "version": "1.0",
+      "sha256": "3294f4e6a479e52bc5bb0e93557aa6d7557c5a4c4339ed3c2d470fec01e856ec"
+    }
+  ]
+}
