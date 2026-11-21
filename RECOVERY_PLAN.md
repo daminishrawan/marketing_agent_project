@@ -1,8 +1,8 @@
 # RECOVERY_PLAN.md — MarketMind AI Ingestion & Retrieval
 
 **Owner:** Damini Shrawan (knowledge / memory / tools)
-**Status:** Approved for execution. Execute one part at a time; each part ends with a gstack gate.
-**Scope of this plan:** Ingestion, hybrid retrieval, benchmark, `knowledge-kb` MCP server, lead records. Campaign-checks, HMAC publisher, LangGraph, and FastAPI are out of this plan and belong to the wider team.
+**Status:** Fit check against proposed gaps completed 2026-11-21. All proposed items are already built. See Section 7 for the full analysis.
+**Scope of this plan:** Ingestion, hybrid retrieval, benchmark, `knowledge-kb` MCP server, lead records. Campaign-checks, HMAC publisher, LangGraph, and FastAPI are out of this plan and belong to the wider team. **All scoped parts are built (1A–1H, 2, 3, 4, 4c, 4d, retention, cascade, manifest, inventory).**
 
 ---
 
@@ -12,6 +12,7 @@
 2. No OpenRouter key yet. Embeddings run behind an interface with a deterministic local backend for tests and a `baai/bge-m3` OpenRouter backend activated by `OPENROUTER_API_KEY`. Document and query use the same backend.
 3. The 30+ benchmark queries are drafted from the source text and marked `"label_status": "self-drafted"`. They are not evaluation-grade until Dr. Ashutosh Verma replaces or confirms them.
 4. Python 3.12 venv at `.venv/`. The current 3.13 environment is not used for the build.
+5. **Fit check finding:** all proposed gaps under Layers A–C were submitted without reading the current source. Every item in the proposed Ingestion & Retrieval layer and Tool layer already exists. The Memory & Deletion layer items exist at different paths. See Section 7.
 
 ---
 
@@ -145,6 +146,7 @@ Rule: a part does not start until the previous part's gate artifact exists.
 - **Not blocking:** OpenRouter key. Local embedder is used otherwise; OpenRouter backend is wired but untested without a key.
 - **Not blocking:** Prompt Guard is a heuristic stub. A real classifier is a later swap behind the same interface.
 - **Decision needed later:** whether non-English brand files (Hindi/Marathi) enter the golden set. Current plan is English-only.
+- **Fit check finding — no new code needed for proposed gaps ~70% built.** See Section 7 and 8 below. The suggested "Phase 1" (chunker.py + hybrid_search.py on Brand A) is already finished and tested.
 
 ---
 
@@ -209,3 +211,97 @@ Rule: a part does not start until the previous part's gate artifact exists.
 - Cascade implemented (`src/mm/cascade.py`): `purge_company_data` covers relational, Chroma and BM25, and the trace interface. Layers 1 and 2 (LangGraph store and checkpoints) and the LangSmith backend are not built, so their receipts say so. `purge_lead` deletes the lead. Both are idempotent and verified. Full suite: 186 passing.
 - Approval audit log: done (`storage/approval_audit.jsonl`, written by the approval service). Not built: a dispatch outbox file.
 - Plan 1A–1H complete; Parts 2, 3, 4, 4c and 4d also complete. Not built from the spec: LangGraph orchestration and specialist agents, campaign planning, short- and long-term memory with cascade deletion, the FastAPI service and dashboard, Docker and monitoring, Reflexion loop, judge calibration, and the 60+ case evaluation. Prompt Guard is still a heuristic stub. Real embeddings and a meaningful Recall@5 need an OpenRouter key and paraphrase labels.
+
+---
+
+## 7. Pre-Implementation Fit Check Results (2026-11-21)
+
+**Trigger:** A proposed gap list covering 13 deliverable items across three layers (Ingestion & Retrieval, Tool Layer, Memory & Deletion) was submitted as new work. A structured gstack pre-implementation check was run using the current repository state.
+
+**Key finding: ~70% of the proposed items are already built (195+ tests passing).** The proposal appears to have been written from an earlier spec snapshot, not from the current codebase.
+
+### 7A. Ingestion & Retrieval Layer — All items already built
+
+| # | Proposed item | Found at | Verdict |
+|---|---|---|---|
+| 1 | `src/security/sanitizer.py` — pre-embedding sieve | `src/mm/ingest.py` — hidden HTML stripping (`display:none`, `visibility:hidden`, `font-size:0`, script/style/noscript/meta), Prompt Guard heuristic stub at 0.85 | **Defer.** Exists in ingest.py. Path `src/security/` doesn't match project convention (`src/mm/`). |
+| 2 | `src/ingestion/chunker.py` — metadata-aware chunker | `src/mm/ingest.py` — recursive splitter (500 chars, 50 overlap, separators `\n\n` / `\n` / `. ` / ` ` / ``), deterministic passage IDs | **Defer.** Exists. Same path mismatch. |
+| 3 | `src/retrieval/hybrid_search.py` — Chroma + BM25 + RRF | `src/mm/search.py` — 3-variant query expansion, dense + lexical top 50 each, RRF(k=60), cross-encoder rerank on top 20 | **Defer.** Built, tested (12 tests), benchmarked. |
+| 4 | `src/retrieval/reranker.py` — CPU cross-encoder | `src/mm/search.py` — lazily-loaded `CrossEncoderReranker` (`cross-encoder/ms-marco-MiniLM-L-6-v2`). Tests inject a fake. | **Defer.** Built. |
+| 5 | `evaluation/benchmark_retrieval.py` — Recall@5 | `src/mm/bench.py` — baseline vs multi-query, markdown report to `storage/reports/recall_at_5.md` | **Defer.** Built. Current Recall@5 = 0.973 (self-drafted). |
+
+### 7B. Tool Layer — All items already built
+
+| # | Proposed item | Found at | Verdict |
+|---|---|---|---|
+| 6 | `knowledge-kb` FastMCP server (READ) | `src/mm/mcp_kb.py` — `search_knowledge`, `get_passage` (tenant-checked), `get_brand_profile` (pending-approval error). 11 tests. | **Defer.** Built. |
+| 7 | `campaign-checks` FastMCP server (READ) | `src/mm/campaign_checks.py` — `validate_channel` (from `config.yaml`), `check_offer_conflict` (date overlaps, margin caps). 20 tests. | **Defer.** Built. |
+| 8 | `lead-records` FastMCP server (READ/WRITE) | `src/mm/records.py` — `create_lead` (consent check, masked contacts), `get_lead` (scoped by company). 11 tests. | **Keep with Modify.** `score_lead` tool is the only real gap not yet built. |
+| 9 | `test-publisher` FastMCP server (WRITE gated) | `src/mm/publisher.py` + `src/mm/approval_service.py` — canonical JSON hash, HMAC-SHA256, idempotency keys, destination allowlist. 17 tests. | **Defer.** Built, including separate approval process with TLS and credential rotation (Parts 4, 4c, 4d). |
+| 10 | `tests/` with ErrorPayload compliance | 17 test files, 150+ tests. Every tool returns `ErrorPayload` instead of raising. | **Defer.** Built and verified. |
+
+### 7C. Memory & Deletion Layer — Partially built at different paths
+
+| # | Proposed item | Found at | Verdict |
+|---|---|---|---|
+| 11 | `src/memory/long_term_store.py` — LangGraph Store | **Not built.** RECOVERY_PLAN.md Section 0 explicitly defers LangGraph to wider team scope. `memory_policy.md` Section 7 confirms layers 1 and 2 report `not_built`. | **Defer** — real gap, but belongs to wider LangGraph orchestration scope. |
+| 12 | `src/memory/cascade_deletion.py` — 5-layer purge | `src/mm/cascade.py` — `purge_company_data` (relational + Chroma + BM25 + trace interface, with verification receipts), `purge_lead`. Layers 1 (LangGraph store) and 2 (checkpoints) report `not_built`. 186 tests. | **Modify.** Core exists at `src/mm/cascade.py`. Path `src/memory/` differs from project convention. LangGraph store and checkpoint layers are the real gaps. |
+
+### 7D. Summary
+
+| Verdict | Count |
+|---|---|
+| **Defer** (already built) | 10 |
+| **Keep with Modify** (exists, minor gap) | 1 |
+| **Defer** (real gap, belongs to wider scope) | 1 |
+| **Total proposed items** | 12 |
+
+### 7E. Shared Contracts — Already Defined and Enforced
+
+All contracts are in `src/mm/models.py` (v1.0) and used across the pipeline:
+
+| Contract | Definition | Used by |
+|---|---|---|
+| `passage_id` format | `{company_id}:{source_sha12}:{chunk_index}` | ingest -> index -> search -> mcp_kb |
+| `Passage` schema | Pydantic: `passage_id`, `company_id`, `text`, `source_ref`, `source_sha12`, `chunk_index`, `source_type`, `language`, `approved_flag` | Same chain |
+| `ErrorPayload` | `is_error=True`, `error_code`, `message`, `remediation_hint` | All 4 FastMCP servers + search + records + publisher |
+| `SearchResult` / `SearchHit` | `hits: list[SearchHit]`, `total_found`, `error` | search -> mcp_kb |
+| `BrandProfile` | `brand_id`, `company_id`, `approved_flag=False`, `source_metadata` | mcp_kb, brand pack validation |
+| `company_id` namespace | `comp_cloudvane_01`, `comp_pulsepeak_02`, `comp_terraroast_03` | Every module |
+| HMAC payload schema | `expiry.HMAC-SHA256(secret, company\|hash\|expiry)` | approval -> approval_service -> publisher |
+| Chunk metadata | Chroma metadata dict: tenant, source, type, language, approval state | ingest -> index -> search |
+
+**No new shared contracts needed.** Any new work uses these.
+
+---
+
+## 8. Corrected Roadmap — What's Actually Left
+
+The proposed "Phase 1" (chunker.py + hybrid_search.py on Brand A) is already finished and tested. The real remaining work is smaller and falls into two categories: minor completion items within current scope, and the deferred wider-system scope.
+
+### 8A. Within Current Scope (immediate, small)
+
+| Phase | What | Effort |
+|---|---|---|
+| **1i** | `score_lead` tool on lead-records server. Rule-based scoring (inquiry length, consent age). 3–4 tests. | ~30 min |
+| **1ii** | Re-run Recall@5 benchmark with real embeddings once OpenRouter key is obtained. Switch `LocalHashEmbedder` → `OpenRouterEmbedder`. | ~1 hour (external key needed) |
+| **1iii** | Dr. Ashutosh Verma to write paraphrase queries (not self-drafted) for evaluation-grade numbers. | External |
+| **1iv** | Replace Prompt Guard heuristic stub with a real classifier behind the same interface. | Moderate |
+| **1v** | Brand A licence decision (T4 from Section 6). See `source_inventory.md` Section 6. | Decision needed |
+
+### 8B. Wider-System Scope (deferred, needs its own plan)
+
+| Phase | What | Pre-requisite |
+|---|---|---|
+| **2a** | LangGraph orchestration and specialist agents | New plan needed |
+| **2b** | LangGraph Store (`long_term_store.py`) — partitioned namespaces per `memory_policy.md` | Phase 2a |
+| **2c** | Cascade layers 1 (store eviction) and 2 (checkpoint DB purge) in `cascade.py` | Phase 2b |
+| **2d** | FastAPI service and dashboard | New plan needed |
+| **2e** | Docker and monitoring | Phase 2d |
+| **2f** | Reflexion loop and judge calibration | New plan needed |
+| **2g** | 60+ case evaluation | Phase 1ii, 1iii |
+| **2h** | Campaign planning module | New plan needed |
+
+### 8C. Suggested Next Step
+
+Start with **Phase 1i** (`score_lead`) — it is the one verifiable gap in the proposed scope that is not already built, fits within the current module architecture, and completes the lead-records server. It takes ~30 minutes and unblocks the lead-scoring use case.
