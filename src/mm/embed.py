@@ -3,12 +3,23 @@
 from __future__ import annotations
 
 import hashlib
+import logging
 import math
 import os
 import re
+import time
 from typing import Protocol
 
 import requests
+
+log = logging.getLogger(__name__)
+
+# ── env var identifiers (not evaluated at import) ─────────────────────────────
+
+MM_EMBEDDER_OPENROUTER = "openrouter"
+MM_EMBEDDER_LOCAL = "local"
+
+# ── protocol ──────────────────────────────────────────────────────────────────
 
 
 class Embedder(Protocol):
@@ -18,6 +29,9 @@ class Embedder(Protocol):
     def embed_documents(self, texts: list[str]) -> list[list[float]]: ...
 
     def embed_query(self, text: str) -> list[float]: ...
+
+
+# ── local (deterministic hash stub) ───────────────────────────────────────────
 
 
 class LocalHashEmbedder:
@@ -45,13 +59,18 @@ class LocalHashEmbedder:
         return self._vector(text)
 
 
+# ── OpenRouter (baai/bge-m3) ─────────────────────────────────────────────────
+
+
 class OpenRouterEmbedder:
     """Hosted baai/bge-m3 via OpenRouter. Requires OPENROUTER_API_KEY."""
 
     URL = "https://openrouter.ai/api/v1/embeddings"
+    MAX_RETRIES = 3
+    BACKOFF_SEC = 5.0
 
     def __init__(self, api_key: str, model: str = "baai/bge-m3", dim: int = 1024,
-                 batch_size: int = 64, timeout: float = 30.0) -> None:
+                 batch_size: int = 64, timeout: float = 60.0) -> None:
         if not api_key:
             raise ValueError("OPENROUTER_API_KEY is required for the OpenRouter embedder")
         self._api_key = api_key
@@ -61,25 +80,79 @@ class OpenRouterEmbedder:
         self._timeout = timeout
         self.name = f"openrouter-{model}"
 
+    def _call(self, texts: list[str]) -> list[list[float]]:
+        last_error: Exception | None = None
+        for attempt in range(1, self.MAX_RETRIES + 1):
+            try:
+                response = requests.post(
+                    self.URL,
+                    json={"model": self._model, "input": texts},
+                    headers={"Authorization": f"Bearer {self._api_key}"},
+                    timeout=self._timeout,
+                )
+                if response.status_code == 429 and attempt < self.MAX_RETRIES:
+                    wait = self.BACKOFF_SEC * attempt
+                    log.warning("OpenRouter rate limited (attempt %d/%d), retrying in %.1fs", attempt, self.MAX_RETRIES, wait)
+                    time.sleep(wait)
+                    continue
+                response.raise_for_status()
+                rows = sorted(response.json()["data"], key=lambda row: row["index"])
+                return [row["embedding"] for row in rows]
+            except requests.RequestException as exc:
+                last_error = exc
+                if attempt < self.MAX_RETRIES:
+                    wait = self.BACKOFF_SEC * attempt
+                    log.warning("OpenRouter call failed (attempt %d/%d): %s — retrying in %.1fs", attempt, self.MAX_RETRIES, exc, wait)
+                    time.sleep(wait)
+                else:
+                    raise
+        raise RuntimeError(f"OpenRouter embedding failed after {self.MAX_RETRIES} attempts") from last_error
+
     def embed_documents(self, texts: list[str]) -> list[list[float]]:
         vectors: list[list[float]] = []
-        for start in range(0, len(texts), self._batch_size):
+        total = len(texts)
+        for start in range(0, total, self._batch_size):
             batch = texts[start:start + self._batch_size]
-            response = requests.post(
-                self.URL,
-                json={"model": self._model, "input": batch},
-                headers={"Authorization": f"Bearer {self._api_key}"},
-                timeout=self._timeout,
-            )
-            response.raise_for_status()
-            rows = sorted(response.json()["data"], key=lambda row: row["index"])
-            vectors.extend(row["embedding"] for row in rows)
+            log.info("Embedding batch %d/%d (%d docs)", start // self._batch_size + 1, (total + self._batch_size - 1) // self._batch_size, len(batch))
+            vectors.extend(self._call(batch))
         return vectors
 
     def embed_query(self, text: str) -> list[float]:
-        return self.embed_documents([text])[0]
+        return self._call([text])[0]
+
+
+# ── factory ───────────────────────────────────────────────────────────────────
 
 
 def make_embedder() -> Embedder:
-    key = os.environ.get("OPENROUTER_API_KEY")
-    return OpenRouterEmbedder(key) if key else LocalHashEmbedder()
+    """Return an embedder based on env vars.
+
+    Priority:
+    1. ``MM_EMBEDDER=local`` or ``MM_EMBEDDER=openrouter`` forces one if set.
+    2. ``OPENROUTER_API_KEY`` set → ``OpenRouterEmbedder``.
+    3. Else → ``LocalHashEmbedder``.
+
+    Set ``MM_EMBEDDER=local`` to use the hash embedder even when a key is
+    present (e.g. during development or tests).
+    """
+    explicit = os.environ.get("MM_EMBEDDER", "").strip().lower()
+
+    key = os.environ.get("OPENROUTER_API_KEY", "").strip()
+
+    # honour an explicit override
+    if explicit == MM_EMBEDDER_LOCAL:
+        log.info("Embedder: forced local (MM_EMBEDDER=local)")
+        return LocalHashEmbedder()
+    if explicit == MM_EMBEDDER_OPENROUTER:
+        if not key:
+            raise ValueError("MM_EMBEDDER=openrouter but OPENROUTER_API_KEY is not set")
+        log.info("Embedder: forced openrouter (MM_EMBEDDER=openrouter)")
+        return OpenRouterEmbedder(key)
+
+    # automatic selection
+    if key:
+        log.info("Embedder: openrouter (OPENROUTER_API_KEY present)")
+        return OpenRouterEmbedder(key)
+
+    log.info("Embedder: local (no OPENROUTER_API_KEY)")
+    return LocalHashEmbedder()

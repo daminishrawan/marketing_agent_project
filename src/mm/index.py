@@ -192,3 +192,51 @@ class Index:
             language=meta["language"],
             approved_flag=bool(meta["approved_flag"]),
         )
+
+
+# ── CLI: re-index ─────────────────────────────────────────────────────────────
+
+
+def reindex(persist_dir: Path | str = DEFAULT_PERSIST_DIR) -> None:
+    """Destroy the current index and rebuild from data_input using the current embedder."""
+    from src.mm.embed import make_embedder
+    from src.mm.ingest import ROOT, ingest_file
+
+    DATA_DIR = ROOT / "data_input"
+
+    path = Path(persist_dir)
+    if path.exists():
+        import shutil
+        shutil.rmtree(path)
+        print(f"Removed existing index at {path}")
+
+    embedder = make_embedder()
+    print(f"Building index with embedder: {embedder.name}")
+    index = Index(embedder, persist_dir=path)
+
+    for company_dir in sorted(p for p in DATA_DIR.iterdir() if p.is_dir()):
+        company_id = company_dir.name
+        print(f"  {company_id} ...", end="", flush=True)
+        for source in sorted(company_dir.iterdir()):
+            if source.suffix.lower() not in {".txt", ".md", ".html", ".pdf"}:
+                continue
+            result = ingest_file(source, company_id)
+            if result.error is not None:
+                print(f"\n  ERROR on {source}: {result.error.error_code}: {result.error.message}")
+                continue
+            index.index_passages(result.passages)
+        print(f" {index.count_company(company_id)} passages")
+
+    print(f"Done. Companies: {', '.join(index.company_ids())}")
+
+
+if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser(description="Index management for MarketMind AI")
+    parser.add_argument("--reindex", action="store_true", help="Destroy and rebuild the index")
+    parser.add_argument("--persist-dir", type=Path, default=DEFAULT_PERSIST_DIR, help="Chroma persist directory")
+    args = parser.parse_args()
+    if args.reindex:
+        reindex(persist_dir=args.persist_dir)
+    else:
+        print("No action specified. Use --reindex to rebuild the index.")
