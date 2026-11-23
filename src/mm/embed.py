@@ -63,14 +63,18 @@ class LocalHashEmbedder:
 
 
 class OpenRouterEmbedder:
-    """Hosted baai/bge-m3 via OpenRouter. Requires OPENROUTER_API_KEY."""
+    """OpenAI-compatible hosted embeddings (OpenRouter, FreeLLM, etc.). Requires OPENROUTER_API_KEY.
 
-    URL = "https://openrouter.ai/api/v1/embeddings"
+    The endpoint URL can be overridden with ``EMBEDDER_BASE_URL`` (defaults to OpenRouter).
+    """
+
+    DEFAULT_URL = "https://openrouter.ai/api/v1/embeddings"
     MAX_RETRIES = 3
     BACKOFF_SEC = 5.0
 
     def __init__(self, api_key: str, model: str = "baai/bge-m3", dim: int = 1024,
-                 batch_size: int = 64, timeout: float = 60.0) -> None:
+                 batch_size: int = 64, timeout: float = 60.0,
+                 url: str | None = None) -> None:
         if not api_key:
             raise ValueError("OPENROUTER_API_KEY is required for the OpenRouter embedder")
         self._api_key = api_key
@@ -78,14 +82,15 @@ class OpenRouterEmbedder:
         self.dim = dim
         self._batch_size = batch_size
         self._timeout = timeout
-        self.name = f"openrouter-{model}"
+        self._url = url or self.DEFAULT_URL
+        self.name = f"openrouter-{model}@{self._url}"
 
     def _call(self, texts: list[str]) -> list[list[float]]:
         last_error: Exception | None = None
         for attempt in range(1, self.MAX_RETRIES + 1):
             try:
                 response = requests.post(
-                    self.URL,
+                    self._url,
                     json={"model": self._model, "input": texts},
                     headers={"Authorization": f"Bearer {self._api_key}"},
                     timeout=self._timeout,
@@ -151,8 +156,9 @@ def make_embedder() -> Embedder:
 
     # automatic selection
     if key:
-        log.info("Embedder: openrouter (OPENROUTER_API_KEY present)")
-        return OpenRouterEmbedder(key)
+        base_url = os.environ.get("EMBEDDER_BASE_URL", "").strip() or None
+        log.info("Embedder: openrouter (OPENROUTER_API_KEY present, url=%s)", base_url or OpenRouterEmbedder.DEFAULT_URL)
+        return OpenRouterEmbedder(key, url=base_url)
 
     log.info("Embedder: local (no OPENROUTER_API_KEY)")
     return LocalHashEmbedder()

@@ -8,3 +8,6 @@ pptx_extracted/
 .claude/
 .DS_Store
 project_details.md
+
+# local secrets (never commit)
+.env

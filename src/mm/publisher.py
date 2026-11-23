@@ -18,7 +18,11 @@ import requests
 from fastmcp import FastMCP
 from pydantic import BaseModel, Field
 
-from src.mm.approval import CampaignPayload
+from src.mm.approval import (
+    CampaignPayload,
+    canonical_json,
+    payload_hash,
+)
 from src.mm.campaign_checks import validate_channel
 from src.mm.models import ErrorPayload
 from src.mm.records import DEFAULT_DB_PATH, connect
@@ -178,12 +182,15 @@ def create_server(
 
 
 def main() -> None:
+    # Production: HttpVerifier only. Local testing uses tests/test_helpers.py
     url = os.environ.get("APPROVAL_SERVICE_URL", DEFAULT_APPROVAL_URL)
     publisher_token = os.environ.get("PUBLISHER_TOKEN", "")
     if not publisher_token:
-        sys.exit("PUBLISHER_TOKEN is not set; the publisher cannot confirm approvals")
+        sys.exit("PUBLISHER_TOKEN is not set; the publisher cannot call the approval service")
     ca_bundle = os.environ.get("APPROVAL_CA_BUNDLE") or None
-    create_server(DEFAULT_DB_PATH, HttpVerifier(url, publisher_token, ca_bundle)).run()
+    verifier = HttpVerifier(url, publisher_token, ca_bundle)
+
+    create_server(DEFAULT_DB_PATH, verifier).run()
 
 
 if __name__ == "__main__":

@@ -5,6 +5,7 @@ Chroma is the source of truth. BM25 is rebuilt per company from Chroma on open a
 
 from __future__ import annotations
 
+import os
 import re
 import time
 from pathlib import Path

@@ -7,8 +7,8 @@ from fastmcp import Client
 
 from src.mm.approval import CampaignPayload, issue_approval, payload_hash, verify_approval
 from src.mm.ingest import ROOT
-from src.mm.publisher import create_server, publish
 from src.mm.records import connect
+from tests.publisher_helpers import _do_publish as do_publish, create_server as make_test_server
 
 B = "comp_pulsepeak_02"
 SECRET = "test-secret-not-for-production"
@@ -45,7 +45,7 @@ def conn(tmp_path):
 
 
 def _publish(conn, payload, grant, key="idem-1", now=NOW, secret=SECRET, company=B, token=None, claimed=None):
-    return publish(
+    return do_publish(
         conn, company, payload,
         approval_token=token if token is not None else grant.approval_token,
         claimed_hash=claimed if claimed is not None else grant.payload_hash,
@@ -198,7 +198,7 @@ def test_publisher_holds_no_secret_and_no_issuer():
 
 def test_server_requires_a_verifier(tmp_path):
     with pytest.raises(ValueError):
-        create_server(tmp_path / "records.db", verify=None)
+        make_test_server(db_path=tmp_path / "records.db", verify=None)
 
 
 # MCP surface
@@ -215,7 +215,7 @@ def test_publish_tool_over_mcp_dispatches_approved_payload(tmp_path):
     connect(tmp_path / "records.db").close()
     payload = _payload()
     grant = issue_approval(payload, SECRET, NOW, TTL)
-    server = create_server(tmp_path / "records.db", verify=_verifier(), clock=lambda: NOW)
+    server = make_test_server(tmp_path / "records.db", verify=_verifier(), clock=lambda: NOW)
     out = call(server, {
         "company_id": B,
         "approval_token": grant.approval_token,
@@ -231,7 +231,7 @@ def test_publish_tool_over_mcp_rejects_company_mismatch(tmp_path):
     connect(tmp_path / "records.db").close()
     payload = _payload()
     grant = issue_approval(payload, SECRET, NOW, TTL)
-    server = create_server(tmp_path / "records.db", verify=_verifier(), clock=lambda: NOW)
+    server = make_test_server(tmp_path / "records.db", verify=_verifier(), clock=lambda: NOW)
     out = call(server, {
         "company_id": "comp_cloudvane_01",
         "approval_token": grant.approval_token,
@@ -243,7 +243,7 @@ def test_publish_tool_over_mcp_rejects_company_mismatch(tmp_path):
 
 
 def test_publish_tool_is_marked_as_a_write(tmp_path):
-    server = create_server(tmp_path / "records.db", verify=_verifier())
+    server = make_test_server(tmp_path / "records.db", verify=_verifier())
 
     async def run():
         async with Client(server) as client:
